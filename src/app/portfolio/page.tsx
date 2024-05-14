@@ -23,7 +23,7 @@ const Portfolio = (props: Props) => {
       }
       
       fetchData()
-   },[])
+   },[entry])
    process?.env?.NEXT_PUBLIC_CONTENTFUL_SPACE_ID && process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
    process?.env?.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN && process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
    console.log(entry)
@@ -52,7 +52,7 @@ const Portfolio = (props: Props) => {
             {/*Customize visibility for small screens. */}
             {/* Once design is completed, add links.*/}
             {entry.map((entry)=>(
-               <div  key={entry.sys.id} className='flex max-sm:w-full w-1/2 max-sm:h-full h-1/4 flex-col text-black  hover:bg-slate-200 hover:opacity-75 rounded-xl ' >
+               <div  key={entry?.sys?.id} className='flex max-sm:w-full w-1/2 max-sm:h-full h-1/4 flex-col text-black  hover:bg-slate-200 hover:opacity-75 rounded-xl ' >
                 
                 <Image   className=' border-2 md:w-96 max-sm:w-full max-sm:h-full md:h-96 self-center rounded-xl  ' width={100} height={100} quality={100} src={'https:' + entry?.fields?.nuThreadImage?.fields?.file.url} alt={entry?.fields?.nuThreadImage?.fields?.title} />
                 
