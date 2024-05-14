@@ -27,8 +27,8 @@ const Portfolio = (props: Props) => {
    
    console.log(entry)
    console.log(entry && entry)
-   console.log(process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID)
-   console.log(process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN)
+   console.log(process?.env?.NEXT_PUBLIC_CONTENTFUL_SPACE_ID)
+   console.log(process?.env?.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN)
   return (
     <div className='flex max-sm:flex-col md:grid md:grid-cols-4 md:grid-rows-4 md:flex-row bg-slate-150 h-full w-full max-sm:h-screen h-screen' >
       <div className='flex max-sm:w-full max-sm:h-20 md:w-96 md:col-start-1 md:row-start-1 md:row-span-4 ' >
