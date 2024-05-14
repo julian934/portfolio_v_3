@@ -16,8 +16,8 @@ import {createClient,Entry} from 'contentful'
 
 export async function fetchEntries(){
   try {
-    const entries = await client.getEntries()
-    if (entries.items) return entries.items
+    const entries = await client?.getEntries()
+    if (entries?.items) return entries?.items
     console.log('Error: No entries found')
     return []
   } catch (error) {
@@ -27,10 +27,10 @@ export async function fetchEntries(){
 }
 
 export async function fetchEntryBySlug(slug:string){
-    const entry=await client.getEntries({
+    const entry=await client?.getEntries({
         content_type:'your_content_type_id',
         'fields.slug':slug
     })
-    if(entry.items) return entry.items[0];
+    if(entry?.items) return entry?.items[0];
     console.log('error getting entry.')
 }

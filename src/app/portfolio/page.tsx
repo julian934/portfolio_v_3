@@ -17,13 +17,12 @@ const Portfolio = (props: Props) => {
   
    useEffect(()=>{
       const fetchData=async()=>{
-        const fetchedEntry:any=await fetchEntries()
-        
-        setEntries(fetchedEntry)
-      }
+        const fetchedEntry:any=await fetchEntries();
+        setEntries(fetchedEntry);
+      };
       
-      fetchData()
-   },[entry])
+      fetchData();
+   },[]);
    process?.env?.NEXT_PUBLIC_CONTENTFUL_SPACE_ID && process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
    process?.env?.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN && process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
    console.log(entry)
