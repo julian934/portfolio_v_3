@@ -5,6 +5,7 @@ import Footer from '../components/footer/page'
 import {fetchEntries} from '../../app/utils/getData/contentful'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
+import Link from 'next/link'
 type Props = {}
 
 
@@ -13,20 +14,28 @@ const Portfolio = (props: Props) => {
   //Import portfolio pieces from previous portfolio. Add descriptions visible on hover with a darkened overlay. 
   //Modify portfolio to bring data from a database.
   //Add filters based on options
-  const [entry, setEntries] = useState<any[]>([]);
-  
+  const [currEntry, setEntries] = useState<any[]>([]);
+   const [websiteLinks, setWebsiteLinks] = useState<any>([]);
+
    useEffect(()=>{
       const fetchData=async()=>{
-        const fetchedEntry:any=await fetchEntries();
-        setEntries(fetchedEntry);
+        try{
+          const fetchedEntry:any=await fetchEntries();
+        setWebsiteLinks(fetchedEntry.slice(0,3));
+        setEntries(fetchedEntry.slice(3))
+        }catch(error){
+          console.log(error)
+        }
+        
       };
       
       fetchData();
    },[]);
    process?.env?.NEXT_PUBLIC_CONTENTFUL_SPACE_ID && process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
    process?.env?.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN && process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
-   console.log(entry)
-   console.log(entry && entry)
+   console.log(currEntry)
+   console.log(websiteLinks)
+   console.log(currEntry && currEntry)
    console.log(process?.env?.NEXT_PUBLIC_CONTENTFUL_SPACE_ID)
    console.log(process?.env?.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN)
   return (
@@ -41,27 +50,42 @@ const Portfolio = (props: Props) => {
       <div className='flex md:col-start-2 flex-col md:self-center md:justify-self-center md:row-start-2 md:row-span-2 md:col-span-2  md:h-[900px] md:w-[1200px] md:justify-around border-2 bg-white md:space-y-8 md:rounded-xl max-sm:space-y-8 max-sm:px-4' >
          <h1 className='flex bg-slate-400 md:w-24 opacity-75 text-white max-sm:w-28 max-sm:mt-8 ' >PORTFOLIO</h1>
         <div className='flex md:w-full flex-col' >
-           <h1 className='' >My Portfolio</h1>
-          <div className='flex ' >
+           
+          {/* <h1 className=' ' >My Portfolio</h1>*/}
+          {/* <div className='flex ' >
             Filters-Web and Design,later add SEO results.
-          </div>
+          </div>*/}
          </div>
           <div className=" flex md:h-3/4 max-sm:flex-col md:w-full md:flex-wrap   " >
             {/* Portfolio Items Here*/}
             {/*Customize visibility for small screens. */}
             {/* Once design is completed, add links.*/}
-            {entry.map((entry)=>(
-               <div  key={entry?.sys?.id} className='flex max-sm:w-full w-1/2 max-sm:h-full h-1/4 flex-col text-black  hover:bg-slate-200 hover:opacity-75 rounded-xl ' >
-                
-                <Image   className=' border-2 md:w-96 max-sm:w-full max-sm:h-full md:h-96 self-center rounded-xl  ' width={100} height={100} quality={100} src={'https:' + entry?.fields?.nuThreadImage?.fields?.file.url} alt={entry?.fields?.nuThreadImage?.fields?.title} />
-                
-                <div className=' group relative self-center  w-64 h-64 left-20 md:-top-28' >
-                <h1 className='text-center hidden group-hover:block absolute top-0 left-0 text-amber-500 ' >{entry?.fields?.nuThreadImage?.fields?.title}</h1>
-                <p className=" text-center flex hidden  group-hover:block  group-hover:bg-blue group-hover:w-full group-hover:h-full hidden hover:block h-full w-full border-2 border-black text-amber-500  "  >{entry?.fields?.nuThreadImage?.fields?.description} </p>
-                    <p>Text Test</p>
-                  </div>
-               </div>
-            ))}
+            <div className='flex md:h-3/4 max-sm:flex-col md:justify-around md:self-center md:w-full'>
+  {currEntry.map((entry, index) => (
+    <div key={entry?.sys?.id} className='flex max-sm:w-full md:w-1/2 max-sm:h-full h-1/2 flex-col text-black hover:bg-slate-200 hover:bg-cover hover:opacity-75 rounded-xl'>
+      {websiteLinks[index]?.fields?.websiteLink?.content[0]?.content[0]?.value !== undefined && (
+        <Link href={websiteLinks[index]?.fields?.websiteLink?.content[0]?.content[0]?.value} target='_blank'>
+          {entry?.fields?.nuThreadImage?.fields?.file?.url && (
+            <Image
+              className='border-2 md:w-96 max-sm:w-full max-sm:h-full md:h-80 self-center rounded-xl hover:bg-slate-200 hover:bg-cover'
+              width={100}
+              height={100}
+              quality={100}
+              src={`https:${entry?.fields?.nuThreadImage?.fields?.file?.url}`}
+              alt={entry?.fields?.nuThreadImage?.fields?.title}
+            />
+          )}
+        </Link>
+      )}
+      <div className='group relative self-center md:justify-center text-center md:self-center w-64 md:w-72 hover:bg-slate-200 max-sm:h-64 md:h-full left-20 md:left-0 md:-top-40'>
+        <p className='bg-amber-400 opacity-75 md:rounded-sm'>{entry?.fields?.nuThreadImage?.fields?.title}</p>
+        <p className='text-center flex hidden group-hover:block group-hover:bg-blue group-hover:w-full group-hover:h-full hidden hover:block h-full w-full border-2 border-black text-black group-hover:bg-slate-100 md:rounded-md opacity-75'>
+          {entry?.fields?.nuThreadImage?.fields?.description}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
            
             
             
