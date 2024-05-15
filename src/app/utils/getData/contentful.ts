@@ -1,8 +1,8 @@
-import {createClient,Entry} from 'contentful'
+import {createClient,} from 'contentful'
 
  const client=createClient({
-    space:process?.env?.NEXT_PUBLIC_CONTENTFUL_SPACE_ID||'',
-    accessToken:process?.env?.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN || 'zvnPASattsDHDSI6zMsZEFb6IJ9hJshqw-sRaqdF3eg'
+    space:process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID||'u8b3ckg07xkb',
+    accessToken:process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN || 'zvnPASattsDHDSI6zMsZEFb6IJ9hJshqw-sRaqdF3eg'
 })
 /*interface ImageFields{
     title:string;
