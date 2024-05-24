@@ -102,7 +102,7 @@ const Portfolio = (props: Props) => {
   ))*/}
   {websiteLinks?.map((web:any)=>(
   <div key={web?.fields?.sys?.id} className='flex max-sm:w-full md:w-1/2 max-sm:h-full h-1/2 flex-col text-black hover:bg-slate-200 hover:bg-cover hover:opacity-75 rounded-xl md:space-y-8 md:text-xl max-sm:text-xl' >
-    <h1 className='text-center' >{web?.fields?.nuThreadImage?.fields?.title}</h1>
+    {/*<h1 className='text-center' >{web?.fields?.nuThreadImage?.fields?.title}</h1> */}
     {web?.fields?.websiteLink!==undefined && (
       <Link className='md:flex md:justify-center' href={web?.fields?.websiteLink} >
        
@@ -113,8 +113,8 @@ const Portfolio = (props: Props) => {
               src={`https:${web?.fields?.nuThreadImage?.fields?.file?.url}`} alt={web?.fields?.nuThreadImage?.fields?.title} />
       </Link>
     )}
-    <div className='group relative self-center md:justify-center text-center md:self-center w-64 md:w-72 hover:bg-slate-200 max-sm:h-64 md:h-full left-20 md:left-0 md:-top-40' >
-      <p className='bg-amber-400 opacity-75 md:rounded-sm' >{web?.fields?.nuThreadImage?.fields?.title}</p>
+    <div className='group relative self-center max-sm:flex max-sm:flex-col max-sm:w-full md:justify-center text-center md:self-center md:w-64 md:w-72 hover:bg-slate-200 max-sm:h-64 md:h-full  md:left-0 md:-top-40' >
+      <p className='bg-amber-400 opacity-75 max-sm:flex max-sm:self-center max-sm:px-8  md:rounded-sm rounded-md text-slate-200 ' >{web?.fields?.nuThreadImage?.fields?.title}</p>
       <p className='text-center flex hidden group-hover:block group-hover:bg-blue group-hover:w-full group-hover:h-full hidden hover:block h-full w-full border-2 border-black text-black group-hover:bg-slate-100 md:rounded-md opacity-75' >
         {web?.fields?.nuThreadImage?.fields?.description}
       </p>
